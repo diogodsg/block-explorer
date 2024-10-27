@@ -23,7 +23,7 @@ function App() {
           </thead>
           <tbody className="w-full">
             {/* row 1 */}
-            {[1, 2, 3, 4, 5].map((i) => (
+            {[1, 2, 3, 4, 5].map((_) => (
               <tr>
                 <td>
                   <div className="flex items-center gap-3">
