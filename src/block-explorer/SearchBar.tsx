@@ -1,7 +1,17 @@
-export const SearchBar = () => {
+interface SearchBarProps {
+  value: string;
+  setValue: (val: string) => void;
+}
+export const SearchBar: React.FC<SearchBarProps> = ({ value, setValue }) => {
   return (
     <label className="input input-bordered flex items-center gap-2">
-      <input type="text" className="grow" placeholder="Search" />
+      <input
+        type="text"
+        value={value}
+        className="grow"
+        placeholder="Pesquise pelo hash, cidade ou zona."
+        onChange={(e) => setValue(e.target.value)}
+      />
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 16 16"
