@@ -5,7 +5,7 @@ interface AggregatedProps {
   cities: any[];
 }
 export const Aggregated: React.FC<AggregatedProps> = ({ cities }) => {
-  const summedCites = cities.map((city) => {
+  const summedCites = cities?.map((city) => {
     const sum = city.votes.reduce((acc: any, curr: any) => acc + curr.votes, 0);
     return { ...city, sum };
   });
@@ -13,29 +13,31 @@ export const Aggregated: React.FC<AggregatedProps> = ({ cities }) => {
     <div>
       <h1 className="mx-8 text-3xl font-bold">Prefeito</h1>
       <div className="grid grid-cols-2">
-        {summedCites
-          .sort((a, b) => b.sum - a.sum)
-          .map((c) => (
-            <PositionCard
-              city={c.city}
-              state={c.state}
-              votes={c.votes}
-              digits={3}
-            />
-          ))}
+        {summedCites &&
+          summedCites
+            .sort((a, b) => b.sum - a.sum)
+            .map((c) => (
+              <PositionCard
+                city={c.city}
+                state={c.state}
+                votes={c.votes}
+                digits={3}
+              />
+            ))}
       </div>
       <h1 className="mx-8 text-3xl font-bold">Vereador</h1>
       <div className="grid grid-cols-2">
-        {summedCites
-          .sort((a, b) => b.sum - a.sum)
-          .map((c) => (
-            <PositionCard
-              city={c.city}
-              state={c.state}
-              votes={c.votes}
-              digits={6}
-            />
-          ))}
+        {summedCites &&
+          summedCites
+            .sort((a, b) => b.sum - a.sum)
+            .map((c) => (
+              <PositionCard
+                city={c.city}
+                state={c.state}
+                votes={c.votes}
+                digits={6}
+              />
+            ))}
       </div>
     </div>
   );
@@ -54,6 +56,7 @@ const CandidateCard: React.FC<CandidateCardProps> = ({
 }) => {
   const party = PARTIES[Math.floor(+number[0] / 4)];
   const percentage = (+votes / +totalVotes) * 100;
+
   return (
     <div className="flex gap-4  py-2">
       <div className="avatar flex items-center justify-center">
@@ -61,7 +64,7 @@ const CandidateCard: React.FC<CandidateCardProps> = ({
           <img src={party.photo} />
         </div>
       </div>
-      <div className="flex flex-col">
+      <div className="flex flex-col w-full mr-2">
         <div className="flex justify-between mb-2">
           <div>
             <span className="text-gray-600">Candidato </span>
@@ -75,11 +78,7 @@ const CandidateCard: React.FC<CandidateCardProps> = ({
             {party.name}
           </div>
         </div>
-        <progress
-          className="progress progress-error w-[280px] h-1"
-          value={percentage}
-          max="100"
-        ></progress>
+        <Progress percentage={percentage} color={party.color} />
         <div className="flex justify-between items-end mt-1">
           <div className="text-gray-600  text-xl font-bold">
             {percentage.toFixed(2)}%
@@ -91,6 +90,21 @@ const CandidateCard: React.FC<CandidateCardProps> = ({
   );
 };
 
+interface ProgressProps {
+  percentage: number;
+  color: string;
+}
+
+const Progress: React.FC<ProgressProps> = ({ percentage, color }) => {
+  return (
+    <div className="w-full bg-white h-1 rounded">
+      <div
+        className="bg-red-300 h-1 rounded"
+        style={{ width: percentage.toFixed(0) + "%", backgroundColor: color }}
+      ></div>
+    </div>
+  );
+};
 interface PostionCardProps {
   city: string;
   state: string;

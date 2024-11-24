@@ -50,53 +50,60 @@ export const Blocks: React.FC<BlocksProps> = ({ blocks }) => {
       <table className="table w-full">
         <thead>
           <tr>
+            <th className="w-1 ">N°</th>
+
             <th>Bloco</th>
             <th>Votos</th>
-            <th>Sessão</th>
+            <th>Seção</th>
             <th>Cidade</th>
           </tr>
         </thead>
         <tbody className="w-full">
-          {filteredBlocks.map((block) => (
-            <tr key={block.id}>
-              <td>
-                <div className="flex items-center gap-3">
-                  <div className="avatar">
-                    <div className="mask mask-squircle h-12 w-12">
-                      <img
-                        src="https://icons.veryicon.com/png/o/miscellaneous/foundation-icon-4/block-9.png"
-                        alt="Avatar Tailwind CSS Component"
-                      />
+          {filteredBlocks
+            .sort((a, b) => b.index - a.index)
+            .map((block) => (
+              <tr key={block.id}>
+                <td className="w-1">{block.index}</td>
+                <td className="pl-0">
+                  <div className="flex items-center gap-3">
+                    <div className="avatar">
+                      <div className="mask mask-squircle h-12 w-12">
+                        <img
+                          src="https://icons.veryicon.com/png/o/miscellaneous/foundation-icon-4/block-9.png"
+                          alt="Avatar Tailwind CSS Component"
+                        />
+                      </div>
                     </div>
+                    <BlockDetails
+                      id={block.id}
+                      timestamp={block.timestamp}
+                      setSelectedBlock={(id) =>
+                        setSelectedBlock(blocks.find((b) => b.id == id))
+                      }
+                    />
                   </div>
-                  <BlockDetails
-                    id={block.id}
-                    setSelectedBlock={(id) =>
-                      setSelectedBlock(blocks.find((b) => b.id == id))
-                    }
-                  />
-                </div>
-              </td>
-              <td>
-                <div>
-                  <b>{block.payload.votes.length}</b> votos{" "}
-                </div>
-              </td>
-              <td>
-                <div>
-                  Zona: <b>{block.payload.zone}</b>
-                </div>
-                <div>
-                  Seção: <b>{block.payload.session}</b>
-                </div>
-              </td>
-              <td>
-                <div>
-                  {block.payload.city} - {block.payload.state}
-                </div>
-              </td>
-            </tr>
-          ))}
+                </td>
+                <td>
+                  <div>
+                    <b>{block.payload.votes.length}</b> votos{" "}
+                  </div>
+                </td>
+                <td>
+                  <div>
+                    Zona: <b>{block.payload.zone.replace("_", " ")}</b>
+                  </div>
+                  <div>
+                    Seção: <b>{block.payload.session}</b>
+                  </div>
+                </td>
+                <td>
+                  <div>
+                    {block.payload.city.replace("_", " ")} -{" "}
+                    {block.payload.state}
+                  </div>
+                </td>
+              </tr>
+            ))}
         </tbody>
         <dialog id="my_modal_2" className="modal">
           <div className="modal-box w-11/12 max-w-[800px]">

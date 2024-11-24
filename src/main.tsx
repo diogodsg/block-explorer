@@ -2,6 +2,9 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import "react-perfect-scrollbar/dist/css/styles.css";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
+
 import { BrowserRouter, Routes, Route } from "react-router";
 import { App } from "./App";
 import { UploadBlock } from "./upload-block/UploadBlock";
@@ -14,5 +17,6 @@ createRoot(document.getElementById("root")!).render(
         <Route path="/upload" element={<UploadBlock />} />
       </Routes>
     </BrowserRouter>
+    <ToastContainer />
   </StrictMode>
 );

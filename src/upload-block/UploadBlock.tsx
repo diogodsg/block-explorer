@@ -4,14 +4,23 @@ import { MdFileUpload } from "react-icons/md";
 import { FaFileArchive } from "react-icons/fa";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { BlockchainService } from "../api/block";
+import { toast } from "react-toastify";
 
 export const UploadBlock = () => {
   const [file, setFile] = useState<File | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const uploadSessionData = async () => {
     if (!file) return;
-    const res = await BlockchainService.uploadSessionData(file);
-    console.log(res);
+    setLoading(true);
+    try {
+      const res = await BlockchainService.uploadSessionData(file);
+      toast.success(res.message);
+    } catch (error: any) {
+      toast.error(error?.response?.data?.error || "Erro ao subir bloco");
+    }
+    setFile(null);
+    setLoading(false);
   };
 
   return (
@@ -47,7 +56,7 @@ export const UploadBlock = () => {
         )}
         <button
           className="btn  btn-sm mt-4 w-full"
-          disabled={!Boolean(file)}
+          disabled={!Boolean(file) || loading}
           onClick={uploadSessionData}
         >
           <MdFileUpload /> Subir Arquivo
