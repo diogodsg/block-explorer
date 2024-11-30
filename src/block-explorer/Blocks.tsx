@@ -163,7 +163,7 @@ interface CandidateCardProps {
   hash: string;
 }
 
-const CandidateCard: React.FC<CandidateCardProps> = ({
+export const CandidateCard: React.FC<CandidateCardProps> = ({
   position,
   number,
   hash,
