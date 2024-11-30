@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { CandidateCard } from "../block-explorer/Blocks";
+import { BlockchainService, VerifyVoteResponse } from "../api/block";
 
 interface VerifyVoteFormProps {
-  handleCheckVote: () => void;
+  handleCheckVote: (vote: VerifyVoteResponse) => void;
 }
 
 const VerifyVoteForm: React.FC<VerifyVoteFormProps> = ({ handleCheckVote }) => {
@@ -11,9 +12,13 @@ const VerifyVoteForm: React.FC<VerifyVoteFormProps> = ({ handleCheckVote }) => {
   const [userPin, setUserPin] = useState<string>("");
   const [tsePin, setTsePin] = useState<string>("");
 
-  const handleClick = () => {
-    handleCheckVote();
-    toast.error("Combinação de chaves incorreta");
+  const handleClick = async () => {
+    try {
+      const res = await BlockchainService.verifyVote(userId, userPin, tsePin);
+      handleCheckVote(res);
+    } catch (error) {
+      toast.error("Combinação de chaves incorreta");
+    }
   };
   return (
     <div className="flex items-center justify-center h-screen">
@@ -59,13 +64,19 @@ enum Screens {
 
 export const VerifyVote = () => {
   const [activeScreen, setActiveScreen] = useState<Screens>(Screens.Form);
-
-  const handleCheckVote = () => {
+  const [vote, setVote] = useState<VerifyVoteResponse | null>(null);
+  const handleCheckVote = (v: VerifyVoteResponse) => {
+    setVote(v);
     setActiveScreen(Screens.SeeVote);
   };
   if (activeScreen === Screens.Form)
     return <VerifyVoteForm handleCheckVote={handleCheckVote} />;
-  return <SeeVoteScreen handleReturn={() => setActiveScreen(Screens.Form)} />;
+  return (
+    <SeeVoteScreen
+      vote={vote}
+      handleReturn={() => setActiveScreen(Screens.Form)}
+    />
+  );
 };
 
 interface SecretInputProps {
@@ -112,8 +123,9 @@ const SecretInput: React.FC<SecretInputProps> = ({
 
 interface SeeVoteProps {
   handleReturn: () => void;
+  vote: any;
 }
-const SeeVoteScreen: React.FC<SeeVoteProps> = ({ handleReturn }) => {
+const SeeVoteScreen: React.FC<SeeVoteProps> = ({ handleReturn, vote }) => {
   return (
     <div className="flex items-center justify-center h-screen">
       <div className="card border bord-s-slate-1000 w-[600px] text-slate-500 p-4 px-8 mt-[-60px]">
@@ -122,8 +134,11 @@ const SeeVoteScreen: React.FC<SeeVoteProps> = ({ handleReturn }) => {
           <h3 className="font-bold text-lg text-slate-700">Verificar Voto</h3>
         </div>
         <div className="flex flex-col items-center justify-center my-6 gap-4">
-          <CandidateCard position="Vereador" number="12345" hash="afawfaf" />
-          <CandidateCard position="Vereador" number="12345" hash="afawfaf" />
+          <CandidateCard
+            position={vote.vote.position}
+            number={vote.vote.candidate}
+            hash={vote.vote.hash}
+          />
         </div>
       </div>
     </div>
