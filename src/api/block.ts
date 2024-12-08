@@ -6,14 +6,14 @@ export class BlockchainService {
     formData.append("file", file);
 
     const res = await axios.post(
-      "http://localhost:40010/upload-file-block",
+      "http://blockchurna.tech/core/upload-file-block",
       formData
     );
     return res.data;
   }
 
   static async getBlocks() {
-    const res = await axios.get("http://localhost:40010/blocks");
+    const res = await axios.get("http://blockchurna.tech/core/blocks");
     return res.data;
   }
 
@@ -24,7 +24,7 @@ export class BlockchainService {
   ): Promise<{
     vote: { position: string; candidate: string; hash: string };
   }> {
-    const res = await axios.post("http://localhost:40010/verify-vote", {
+    const res = await axios.post("http://blockchurna.tech/core/verify-vote", {
       voter_id: userId,
       user_pin: userPin,
       tse_pin: tsePin,
