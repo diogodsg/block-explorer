@@ -1,5 +1,6 @@
 import React from "react";
 import { FaRegCopy } from "react-icons/fa";
+import { toast } from "react-toastify";
 
 interface BlockDetailsProp {
   id: string;
@@ -20,19 +21,25 @@ export const BlockDetails: React.FC<BlockDetailsProp> = ({
 
   return (
     <div>
-      <div
-        onClick={handleClick}
-        className="hover:cursor-pointer  flex flex-col"
-      >
+      <div className="hover:cursor-pointer  flex flex-col">
         <div className="flex ">
-          <div className="font-bold overflow-clip w-[250px] text-ellipsis ">
+          <div
+            onClick={handleClick}
+            className="font-bold overflow-clip w-[250px] text-ellipsis "
+          >
             {id}{" "}
           </div>
-          <button>
+          <button
+            className="ml-4"
+            onClick={async () => {
+              await navigator.clipboard.writeText(id);
+              toast("Assinatura copiada");
+            }}
+          >
             <FaRegCopy />
           </button>
         </div>
-        <div className="text-sm opacity-50">
+        <div className="text-sm opacity-50" onClick={handleClick}>
           {formatTimestamp(timestamp * 1000)}
         </div>
       </div>

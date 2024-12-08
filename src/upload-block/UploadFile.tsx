@@ -19,7 +19,7 @@ export const UploadFile: React.FC<UploadFileProps> = ({ file, setFile }) => {
     <div>
       <div
         {...getRootProps({ className: file ? "dropzone disabled" : "" })}
-        className="border-dotted border-2 border-slate-300 rounded-lg flex items-center justify-center p-8 hover:cursor-pointer"
+        className="border-dotted border-2 border-slate-500 rounded-lg flex items-center justify-center p-8 hover:cursor-pointer"
       >
         <input {...getInputProps()} />
         {file ? (

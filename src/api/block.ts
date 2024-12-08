@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export class BlockchainService {
-  static async uploadSessionData(file: File) {
+  static async uploadSectionData(file: File) {
     const formData = new FormData();
     formData.append("file", file);
 

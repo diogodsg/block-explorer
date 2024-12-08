@@ -4,6 +4,7 @@ import { SearchBar } from "./SearchBar";
 import { IoIosClose } from "react-icons/io";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import { FaRegCopy } from "react-icons/fa";
+import { toast } from "react-toastify";
 
 export const PARTIES: any = {
   0: {
@@ -69,7 +70,7 @@ export const Blocks: React.FC<BlocksProps> = ({ blocks }) => {
                     <div className="avatar">
                       <div className="mask mask-squircle h-12 w-12">
                         <img
-                          src="https://icons.veryicon.com/png/o/miscellaneous/foundation-icon-4/block-9.png"
+                          src="https://icons.veryicon.com/png/o/education-technology/cultural-tourism-big-data/block-27.png"
                           alt="Avatar Tailwind CSS Component"
                         />
                       </div>
@@ -93,7 +94,7 @@ export const Blocks: React.FC<BlocksProps> = ({ blocks }) => {
                     Zona: <b>{block.payload.zone.replace("_", " ")}</b>
                   </div>
                   <div>
-                    Seção: <b>{block.payload.session}</b>
+                    Seção: <b>{block.payload.section}</b>
                   </div>
                 </td>
                 <td>
@@ -111,7 +112,7 @@ export const Blocks: React.FC<BlocksProps> = ({ blocks }) => {
               {selectedBlock && (
                 <div className="flex gap-4">
                   <span className="font-bold text-lg">
-                    {selectedBlock.payload.session} -{" "}
+                    {selectedBlock.payload.section} -{" "}
                     {selectedBlock.payload.zone}
                   </span>
                   <span className=" text-lg">|</span>
@@ -180,9 +181,9 @@ export const CandidateCard: React.FC<CandidateCardProps> = ({
       <div className="flex flex-col w-full">
         <div className="flex justify-between">
           <div>
-            <span className="text-gray-600">Candidato</span>
+            <span className="text-gray-400">Candidato</span>
             <span> • </span>
-            <span className="font-bold text-gray-600">{number}</span>{" "}
+            <span className="font-bold text-gray-400">{number}</span>{" "}
           </div>
           <div
             className={`badge font-bold text-white`}
@@ -193,11 +194,16 @@ export const CandidateCard: React.FC<CandidateCardProps> = ({
         </div>
 
         <div className="flex justify-between items-end">
-          <div className="text-gray-600  text-xl font-bold">{position}</div>
+          <div className="text-gray-400  text-xl font-bold">{position}</div>
         </div>
         <div className="flex">
           <div className="w-[200px] overflow-clip text-ellipsis">{hash}</div>
-          <button>
+          <button
+            onClick={async () => {
+              await navigator.clipboard.writeText(hash);
+              toast("Assinatura copiada");
+            }}
+          >
             <FaRegCopy />
           </button>
         </div>

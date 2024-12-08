@@ -27,9 +27,36 @@ export const BlockExplorer = () => {
             <span className="text-3xl mx-4">Block Explorer</span>
           </h1>
         </div>
-        <Aggregated cities={agg} />
-        <h1 className="mx-8 text-3xl font-bold my-4">Blocos</h1>
-        <Blocks blocks={blocks} />
+
+        <div role="tablist" className="tabs tabs-bordered">
+          <input
+            type="radio"
+            name="my_tabs_2"
+            role="tab"
+            className="tab"
+            aria-label="Votos"
+          />
+          <div role="tabpanel" className="tab-content p-6">
+            <Aggregated cities={agg} />
+          </div>
+
+          <input
+            type="radio"
+            name="my_tabs_2"
+            role="tab"
+            className="tab"
+            aria-label="Blocos"
+            defaultChecked
+          />
+          <div role="tabpanel" className="tab-content p-6 ">
+            <div>
+              <h1 className="mx-8 text-3xl font-bold my-4 text-slate-200">
+                Blocos
+              </h1>
+              <Blocks blocks={blocks} />
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

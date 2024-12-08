@@ -10,11 +10,11 @@ export const UploadBlock = () => {
   const [file, setFile] = useState<File | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
 
-  const uploadSessionData = async () => {
+  const uploadSectionData = async () => {
     if (!file) return;
     setLoading(true);
     try {
-      const res = await BlockchainService.uploadSessionData(file);
+      const res = await BlockchainService.uploadSectionData(file);
       toast.success(res.message);
     } catch (error: any) {
       toast.error(error?.response?.data?.error || "Erro ao subir bloco");
@@ -25,16 +25,16 @@ export const UploadBlock = () => {
 
   return (
     <div className="flex items-center justify-center h-screen">
-      <div className="card border bord-s-slate-1000 w-[600px] text-slate-500 p-4 mt-[-60px]">
-        <h3 className="font-bold text-lg text-slate-700">
+      <div className="card border bord-s-slate-300 w-[600px] text-slate-300 p-4 mt-[-60px]">
+        <h3 className="font-bold text-lg text-slate-300">
           Subir Arquivo de Seção
         </h3>
         <hr className="my-2" />
         <UploadFile file={file} setFile={setFile} />
         {file && (
-          <div className="mt-4 font-bold text-slate-700">
+          <div className="mt-4 font-bold text-slate-300">
             Arquivo de Seção
-            <div className="card border bord-s-slate-1000  p-4 mt-2">
+            <div className="card border bord-s-slate-500  p-4 mt-2">
               <div className="flex justify-between">
                 <div className="flex items-center gap-4">
                   <div>
@@ -57,7 +57,7 @@ export const UploadBlock = () => {
         <button
           className="btn  btn-sm mt-4 w-full"
           disabled={!Boolean(file) || loading}
-          onClick={uploadSessionData}
+          onClick={uploadSectionData}
         >
           <MdFileUpload /> Subir Arquivo
         </button>
