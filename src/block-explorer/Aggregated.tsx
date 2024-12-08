@@ -91,7 +91,10 @@ export const Aggregated: React.FC<AggregatedProps> = ({ cities }) => {
           />
         )}
       </div>
-      <h1 className="mx-8 text-3xl font-bold text-slate-200">Prefeito</h1>
+      {!summedCites.length && <div>Sem dados disponíveis</div>}
+      {summedCites?.length > 0 && (
+        <h1 className="mx-8 text-3xl font-bold text-slate-200">Prefeito</h1>
+      )}
       <div className="grid grid-cols-2">
         {summedCites &&
           summedCites
@@ -105,7 +108,9 @@ export const Aggregated: React.FC<AggregatedProps> = ({ cities }) => {
               />
             ))}
       </div>
-      <h1 className="mx-8 text-3xl font-bold text-slate-200">Vereador</h1>
+      {summedCites?.length > 0 && (
+        <h1 className="mx-8 text-3xl font-bold text-slate-200">Vereador</h1>
+      )}
       <div className="grid grid-cols-2">
         {summedCites &&
           summedCites
