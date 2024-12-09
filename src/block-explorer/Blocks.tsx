@@ -6,8 +6,34 @@ import PerfectScrollbar from "react-perfect-scrollbar";
 import { FaRegCopy } from "react-icons/fa";
 import { toast } from "react-toastify";
 
+export const CANDIDATES: any = {
+  "91001": {
+    image:
+      "https://investinhistory.ca/wp-content/uploads/2023/12/shutterstock_2216603153-1.jpg",
+    name: "Diógenes Nascimento",
+  },
+  "36500": {
+    image: "https://cdn.pensador.com/img/authors/so/cr/socrates-l.jpg",
+    name: "Socrátes Paquetá",
+  },
+  "91": {
+    image:
+      "https://static.wixstatic.com/media/36aaf3_86b29260e08e4950b001ae11b1f6462e~mv2.jpg/v1/fill/w_480,h_480,al_c,lg_1,q_80,enc_auto/36aaf3_86b29260e08e4950b001ae11b1f6462e~mv2.jpg",
+    name: "Saci Júnior",
+  },
+  "36": {
+    image: "https://static.significados.com.br/foto/medusa-og.jpg",
+    name: "Medusa Cafusa",
+  },
+};
+
 export const PARTIES: any = {
   0: {
+    name: "PSTC",
+    color: "#1c7ed6",
+    photo: "https://cdn-icons-png.flaticon.com/512/2118/2118592.png",
+  },
+  2: {
     name: "BET",
     color: "#f03e3e",
     photo: "https://cdn-icons-png.flaticon.com/512/9159/9159760.png",
@@ -18,10 +44,15 @@ export const PARTIES: any = {
     photo:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQp1H5WN3MT_yy57bjY7mok1Rd30KG2gbqV5g583mvbZKhtqRsHQRh6lfhZqXLqqYvV9f4&usqp=CAU",
   },
-  2: {
-    name: "PSTC",
-    color: "#1c7ed6",
-    photo: "https://cdn-icons-png.flaticon.com/512/2118/2118592.png",
+  nulo: {
+    name: "NULO",
+    color: "#868e96",
+    photo: "https://cdn-icons-png.flaticon.com/512/5115/5115830.png",
+  },
+  branco: {
+    name: "BRANCO",
+    color: "#868e96",
+    photo: "https://cdn-icons-png.flaticon.com/512/5115/5115830.png",
   },
 };
 
@@ -169,21 +200,29 @@ export const CandidateCard: React.FC<CandidateCardProps> = ({
   number,
   hash,
 }) => {
-  const party = PARTIES[Math.floor(+number[0] / 4)];
-
+  let party = PARTIES[Math.floor(+number[0] / 4)];
+  if (number === "nulo") party = PARTIES.nulo;
+  if (number === "branco") party = PARTIES.branco;
+  const candidate = CANDIDATES[number];
   return (
-    <div className="flex gap-4 w-[320px] py-2 mb-2">
+    <div className="flex gap-4 w-[320px] py-2 mb-2 h-[80px]">
       <div className="avatar flex items-center justify-center">
         <div className="w-14 h-14 rounded-full">
-          <img src={party.photo} />
+          <img
+            src={
+              candidate?.image ||
+              party?.photo ||
+              "https://cdn-icons-png.flaticon.com/512/9159/9159760.png"
+            }
+          />
         </div>
       </div>
       <div className="flex flex-col w-full">
         <div className="flex justify-between">
           <div>
-            <span className="text-gray-400">Candidato</span>
+            <span className="">{candidate?.name || "Candidato"}</span>
             <span> • </span>
-            <span className="font-bold text-gray-400">{number}</span>{" "}
+            <span className="font-bold ">{number}</span>{" "}
           </div>
           <div
             className={`badge font-bold text-white`}
@@ -194,7 +233,7 @@ export const CandidateCard: React.FC<CandidateCardProps> = ({
         </div>
 
         <div className="flex justify-between items-end">
-          <div className="text-gray-400  text-xl font-bold">{position}</div>
+          <div className="text-xl font-bold">{position}</div>
         </div>
         <div className="flex">
           <div className="w-[200px] overflow-clip text-ellipsis">{hash}</div>

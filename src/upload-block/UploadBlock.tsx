@@ -24,44 +24,40 @@ export const UploadBlock = () => {
   };
 
   return (
-    <div className="flex items-center justify-center h-screen">
-      <div className="card border bord-s-slate-300 w-[600px] text-slate-300 p-4 mt-[-60px]">
-        <h3 className="font-bold text-lg text-slate-300">
-          Subir Arquivo de Seção
-        </h3>
-        <hr className="my-2" />
-        <UploadFile file={file} setFile={setFile} />
-        {file && (
-          <div className="mt-4 font-bold text-slate-300">
-            Arquivo de Seção
-            <div className="card border bord-s-slate-500  p-4 mt-2">
-              <div className="flex justify-between">
-                <div className="flex items-center gap-4">
-                  <div>
-                    <FaFileArchive className="text-[30px]" />
-                  </div>
-                  <div>
-                    <div>{file.name}</div>
-                    <div className="font-normal">{file.size} bytes</div>
-                  </div>
+    <div className="card border bord-s-slate-300 w-[600px]  p-4">
+      <h3 className="font-bold text-lg ">Subir Arquivo de Seção</h3>
+      <hr className="my-2" />
+      <UploadFile file={file} setFile={setFile} />
+      {file && (
+        <div className="mt-4 font-bold ">
+          Arquivo de Seção
+          <div className="card border bord-s-slate-500  p-4 mt-2">
+            <div className="flex justify-between">
+              <div className="flex items-center gap-4">
+                <div>
+                  <FaFileArchive className="text-[30px]" />
                 </div>
-                <div className="flex items-center justify-center mr-4">
-                  <button onClick={() => setFile(null)}>
-                    <FaRegTrashAlt className="text-lg" />
-                  </button>
+                <div>
+                  <div>{file.name}</div>
+                  <div className="font-normal">{file.size} bytes</div>
                 </div>
+              </div>
+              <div className="flex items-center justify-center mr-4">
+                <button onClick={() => setFile(null)}>
+                  <FaRegTrashAlt className="text-lg" />
+                </button>
               </div>
             </div>
           </div>
-        )}
-        <button
-          className="btn  btn-sm mt-4 w-full"
-          disabled={!Boolean(file) || loading}
-          onClick={uploadSectionData}
-        >
-          <MdFileUpload /> Subir Arquivo
-        </button>
-      </div>
+        </div>
+      )}
+      <button
+        className="btn  btn-sm mt-4 w-full"
+        disabled={!Boolean(file) || loading}
+        onClick={uploadSectionData}
+      >
+        <MdFileUpload /> Subir Arquivo
+      </button>
     </div>
   );
 };

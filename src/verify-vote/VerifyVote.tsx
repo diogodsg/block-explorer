@@ -21,37 +21,35 @@ const VerifyVoteForm: React.FC<VerifyVoteFormProps> = ({ handleCheckVote }) => {
     }
   };
   return (
-    <div className="flex items-center justify-center h-screen">
-      <div className="card border bord-s-slate-1000 w-[600px] text-slate-500 p-4 px-8 mt-[-60px]">
-        <h3 className="font-bold text-lg text-slate-700">Verificar Voto</h3>
-        <div className="flex flex-col gap-2 my-4">
-          <SecretInput
-            label="ID do votante"
-            placeholder="Digite seu ID"
-            value={userId}
-            setValue={setUserId}
-          />
-          <SecretInput
-            label="PIN do votante"
-            placeholder="Digite o PIN do votante"
-            value={userPin}
-            setValue={setUserPin}
-          />
-          <SecretInput
-            label="PIN do TSE"
-            placeholder="Digite o PIN do TSE"
-            value={tsePin}
-            setValue={setTsePin}
-          />
-        </div>
-        <div className="flex mt-4 justify-end">
-          <button
-            className="btn btn-sm btn-success btn-outline"
-            onClick={handleClick}
-          >
-            Verificar Voto
-          </button>
-        </div>
+    <div className="w-[600px]  p-4 px-8 ">
+      <h3 className="font-bold text-lg ">Verificar Voto</h3>
+      <div className="flex flex-col gap-2 my-4">
+        <SecretInput
+          label="ID do votante"
+          placeholder="Digite seu ID"
+          value={userId}
+          setValue={setUserId}
+        />
+        <SecretInput
+          label="PIN do votante"
+          placeholder="Digite o PIN do votante"
+          value={userPin}
+          setValue={setUserPin}
+        />
+        <SecretInput
+          label="PIN do TSE"
+          placeholder="Digite o PIN do TSE"
+          value={tsePin}
+          setValue={setTsePin}
+        />
+      </div>
+      <div className="flex mt-4 justify-end">
+        <button
+          className="btn btn-sm btn-success btn-outline"
+          onClick={handleClick}
+        >
+          Verificar Voto
+        </button>
       </div>
     </div>
   );
@@ -128,10 +126,10 @@ interface SeeVoteProps {
 const SeeVoteScreen: React.FC<SeeVoteProps> = ({ handleReturn, vote }) => {
   return (
     <div className="flex items-center justify-center h-screen">
-      <div className="card border bord-s-slate-1000 w-[600px] text-slate-500 p-4 px-8 mt-[-60px]">
+      <div className="card border bord-s-slate-1000 w-[600px]  p-4 px-8 mt-[-60px]">
         <div className="flex gap-4">
           <span onClick={handleReturn}>voltar</span>
-          <h3 className="font-bold text-lg text-slate-700">Verificar Voto</h3>
+          <h3 className="font-bold text-lg ">Verificar Voto</h3>
         </div>
         <div className="flex flex-col items-center justify-center my-6 gap-4">
           <CandidateCard
