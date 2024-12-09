@@ -5,13 +5,11 @@ import { Aggregated } from "./Aggregated";
 import { DownloadApp } from "../download-app/DownloadApp";
 import { UploadBlock } from "../upload-block/UploadBlock";
 import { VerifyVote } from "../verify-vote/VerifyVote";
-import { CiCloudSun } from "react-icons/ci";
-import { CiCloudMoon } from "react-icons/ci";
 
 export const BlockExplorer = () => {
   const [blocks, setBlocks] = useState<any[]>([]);
   const [agg, setAgg] = useState<any[]>([]);
-  const [currentTheme, setCurrentTheme] = useState<string>("cupcake");
+  const [_, setCurrentTheme] = useState<string>("cupcake");
 
   function toggleTheme() {
     const htmlElement = document.documentElement;
