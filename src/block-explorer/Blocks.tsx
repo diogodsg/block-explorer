@@ -12,10 +12,28 @@ export const CANDIDATES: any = {
       "https://investinhistory.ca/wp-content/uploads/2023/12/shutterstock_2216603153-1.jpg",
     name: "Diógenes Nascimento",
   },
+  "91002": {
+    image:
+      "https://filosofia.arcos.org.br/content/images/2021/07/Plato-raphael-1.jpg",
+    name: "Platão Morrimento",
+  },
   "36500": {
     image: "https://cdn.pensador.com/img/authors/so/cr/socrates-l.jpg",
     name: "Socrátes Paquetá",
   },
+  "36600": {
+    image: "https://upload.wikimedia.org/wikipedia/commons/c/c0/Aristoteles.jpg",
+    name: "Aristóteles Bauermann",
+  },
+  "42123": {
+    image: "https://www.in2greece.com/english/historymyth/mythology/wp-content/uploads/2024/05/agamemnon-258x300.jpg",
+    name: "Agamemnon Pereira",
+  },
+  "42321": {
+    image: "https://theancienthome.com/cdn/shop/products/001-achilles-as-a-leader-fresco-FRME3901082.jpg?v=1665388534",
+    name: "Aquiles da Silva",
+  },
+
   "91": {
     image:
       "https://static.wixstatic.com/media/36aaf3_86b29260e08e4950b001ae11b1f6462e~mv2.jpg/v1/fill/w_480,h_480,al_c,lg_1,q_80,enc_auto/36aaf3_86b29260e08e4950b001ae11b1f6462e~mv2.jpg",
@@ -25,6 +43,13 @@ export const CANDIDATES: any = {
     image: "https://static.significados.com.br/foto/medusa-og.jpg",
     name: "Medusa Cafusa",
   },
+
+  "42": {
+    image: "https://media.istockphoto.com/id/182914318/pt/foto/perseu-e-medusa.jpg?s=2048x2048&w=is&k=20&c=h9EaECe956XkbJtLc_Gu6yUSAaeZD3sb2lMfH0Iz9iQ=",
+    name: "Perseu Luceu",
+  },
+
+  
 };
 
 export const PARTIES: any = {
